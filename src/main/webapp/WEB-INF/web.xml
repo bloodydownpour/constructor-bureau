@@ -6,7 +6,7 @@
 		 version="6.0"
 		 metadata-complete="false">
 
-	<display-name>Пример web-приложения для дисциплин «ПСП», «СиТАиРИС» и «МПО»</display-name>
+	<display-name>Пиздец</display-name>
 	<request-character-encoding>UTF-8</request-character-encoding>
 
 	<welcome-file-list>
@@ -19,11 +19,11 @@
 	</context-param>
 	<context-param>
 		<param-name>jdbc-url</param-name>
-		<param-value>jdbc:postgresql://localhost/ist_project_db</param-value>
+		<param-value>jdbc:postgresql://localhost/baZa</param-value>
 	</context-param>
 	<context-param>
 		<param-name>jdbc-user</param-name>
-		<param-value>root</param-value>
+		<param-value>postgres</param-value>
 	</context-param>
 	<context-param>
 		<param-name>jdbc-password</param-name>

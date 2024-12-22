@@ -115,7 +115,7 @@ html, body {
 	background: #922;
 }
 
-.button[disabled] {
+.button__disabled {
 	background: #666;
 	cursor: default;
 }
