@@ -31,14 +31,14 @@
                         <!-- Итерация по списку заявок -->
                         <c:forEach var="request" items="${requests}">
                             <tr>
-                                <td>${request.id}</td>
+                                <td>${request.id}</a></td>
                                 <td>${request.title}</td>
                                 <td>${request.description}</td>
                                 <td><fmt:formatDate value="${request.creationDate}" pattern="dd.MM.yyyy" /></td>
                                 <td><fmt:formatDate value="${request.deadline}" pattern="dd.MM.yyyy" /></td>
                                 <td>${request.status}</td>
                                 <td>
-                                    <a href="/client/requests/details.html?id=${request.id}">View Details</a>
+                                    <a href="${pageContext.request.contextPath}/client/details.html?id=${request.id}">View Details</a>
                                 </td>
                             </tr>
                         </c:forEach>

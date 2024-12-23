@@ -7,10 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class RequestRepository extends BaseRepository {
     public Optional<Request> findById(Long id) throws SQLException {
@@ -79,8 +76,11 @@ public class RequestRepository extends BaseRepository {
     private Request mapRowToRequest(ResultSet resultSet) throws SQLException {
         Request request = new Request();
         request.setId(resultSet.getInt("id"));
-        request.setStatus(resultSet.getString("status"));
+        request.setTitle(resultSet.getString("title"));
         request.setDescription(resultSet.getString("description"));
+        request.setCreationDate(resultSet.getDate("creationdate"));
+        request.setDeadline(resultSet.getDate("deadline"));
+        request.setStatus(resultSet.getString("status"));
         return request;
     }
 }

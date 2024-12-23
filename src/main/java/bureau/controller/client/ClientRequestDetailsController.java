@@ -12,30 +12,26 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
-@WebServlet("/client/requests.html")
-public class ClientRequestController extends HttpServlet {
+@WebServlet("/client/details.html")
+public class ClientRequestDetailsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (ServiceContainer container = new ServiceContainer()) {
             RequestService requestService = container.getRequestServiceInstance();
+            int requestId = Integer.parseInt(req.getParameter("id"));
+            Request request = requestService.getRequestById(Long.valueOf(requestId)).get();
 
-            List<Request> requests = requestService.getAllRequests();
-            req.setAttribute("requests", requests);
+            if (request == null) {
+                resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Request not found");
+                return;
+            }
+
+            req.setAttribute("request", request);
             System.out.println(req.getContextPath());
-            req.getRequestDispatcher("/WEB-INF/jsp/client/client-requests.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/jsp/client/client-request-details.jsp").forward(req, resp);
         } catch (SQLException e) {
             throw new ServletException(e);
         }
-    }
-
-    private int getClientIdFromSession(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Integer clientId = (Integer) req.getSession().getAttribute("clientId");
-        if (clientId == null) {
-            resp.sendRedirect("/login.html"); // Перенаправление на логин
-            return -1;
-        }
-        return clientId;
     }
 }

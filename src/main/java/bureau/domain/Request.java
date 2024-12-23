@@ -108,8 +108,24 @@ public class Request extends Entity {
         this.leadID = leadID;
         this.projectTeamID = projectTeamID;
     }
-
     public Request() {
         super();
     }
-}
+
+        @Override
+        public String toString() {
+            return "Request{" +
+                    "id=" + getId() +
+                    "title='" + title + '\'' +
+                    ", description='" + description + '\'' +
+                    ", creationDate=" + creationDate +
+                    ", deadline=" + deadline +
+                    ", status='" + status + '\'' +
+                    ", clientID=" + clientID +
+                    ", managerID=" + managerID +
+                    ", leadID=" + leadID +
+                    ", projectTeamID=" + projectTeamID +
+                    '}';
+        }
+    }
+
