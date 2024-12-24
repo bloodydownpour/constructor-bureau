@@ -2,7 +2,7 @@ package bureau.domain;
 
 import org.eclipse.tags.shaded.org.apache.regexp.RE;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Request extends Entity {
     private String title;
@@ -86,7 +86,7 @@ public class Request extends Entity {
         this.projectTeamID = projectTeamID;
     }
 
-    public Request(int id,
+    public Request(
                    String title,
                    String description,
                    Date creationDate,
@@ -97,7 +97,6 @@ public class Request extends Entity {
                    int leadID,
                    int projectTeamID)
     {
-        super(id);
         this.title = title;
         this.description = description;
         this.creationDate = creationDate;

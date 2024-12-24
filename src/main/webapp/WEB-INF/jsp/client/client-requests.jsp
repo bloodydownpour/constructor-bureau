@@ -42,13 +42,16 @@
                                 </td>
                             </tr>
                         </c:forEach>
+                        <p><a href="${pageContext.request.contextPath}/client/request/new.html">Create a new request</a>.</p>
                     </tbody>
                 </table>
             </c:when>
             <c:otherwise>
-                <p>No requests found. <a href="/client/requests/new.html">Create a new request</a>.</p>
+                <p>No requests found. <a href="${pageContext.request.contextPath}/client/request/new.html">Create a new request</a>.</p>
             </c:otherwise>
         </c:choose>
+
+
     </main>
     <footer>
         <p>&copy; 2024 Your Company</p>

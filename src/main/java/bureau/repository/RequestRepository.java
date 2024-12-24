@@ -52,10 +52,19 @@ public class RequestRepository extends BaseRepository {
     }
 
     public void save(Request request) throws SQLException {
-        String query = "INSERT INTO request (status, description) VALUES (?, ?)";
+        String query = "INSERT INTO request " +
+                "(title, description, creationdate, deadline, status, clientid, managerid, leadid, projectteamid) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, request.getStatus());
+            statement.setString(1, request.getTitle());
             statement.setString(2, request.getDescription());
+            statement.setDate(3, request.getCreationDate());
+            statement.setDate(4, request.getDeadline());
+            statement.setString(5, request.getStatus());
+            statement.setInt(6, request.getClientID());
+            statement.setInt(7, request.getManagerID());
+            statement.setInt(8, request.getLeadID());
+            statement.setInt(9, request.getProjectTeamID());
             statement.executeUpdate();
 
             ResultSet generatedKeys = statement.getGeneratedKeys();
@@ -81,6 +90,10 @@ public class RequestRepository extends BaseRepository {
         request.setCreationDate(resultSet.getDate("creationdate"));
         request.setDeadline(resultSet.getDate("deadline"));
         request.setStatus(resultSet.getString("status"));
+        request.setClientID(resultSet.getInt("clientid"));
+        request.setManagerID(resultSet.getInt("managerid"));
+        request.setLeadID(resultSet.getInt("leadid"));
+        request.setProjectTeamID(resultSet.getInt("projectteamid"));
         return request;
     }
 }
