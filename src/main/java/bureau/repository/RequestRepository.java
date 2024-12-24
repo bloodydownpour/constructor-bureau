@@ -82,6 +82,26 @@ public class RequestRepository extends BaseRepository {
         }
     }
 
+    public void acceptRequest(Long id) throws SQLException {
+        String query = "UPDATE request SET status = \'In Progress\' WHERE id = ?";
+        try (PreparedStatement statement = getConnection().prepareStatement(query)) {
+            statement.setLong(1, id);
+            statement.executeUpdate();
+        }
+    }
+    public List<Request> getPendingRequests() throws SQLException {
+        String query = "SELECT * FROM request WHERE status = \'Pending\'";
+        try (PreparedStatement statement = getConnection().prepareStatement(query)) {
+            ResultSet resultSet = statement.executeQuery();
+            List<Request> requests = new ArrayList<>();
+
+            while (resultSet.next()) {
+                requests.add(mapRowToRequest(resultSet));
+            }
+            return requests;
+        }
+    }
+
     private Request mapRowToRequest(ResultSet resultSet) throws SQLException {
         Request request = new Request();
         request.setId(resultSet.getInt("id"));
@@ -96,4 +116,6 @@ public class RequestRepository extends BaseRepository {
         request.setProjectTeamID(resultSet.getInt("projectteamid"));
         return request;
     }
+
+
 }

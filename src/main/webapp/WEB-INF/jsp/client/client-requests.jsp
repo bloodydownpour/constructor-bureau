@@ -28,7 +28,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Итерация по списку заявок -->
                         <c:forEach var="request" items="${requests}">
                             <tr>
                                 <td>${request.id}</a></td>

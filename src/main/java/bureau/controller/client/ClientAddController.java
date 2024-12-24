@@ -46,7 +46,7 @@ public class ClientAddController extends HttpServlet {
                     description,
                     new Date(System.currentTimeMillis()),
                     deadline,
-                    "NEW",
+                    "Pending",
                     1,
                     1,
                     1,

@@ -24,6 +24,14 @@ public class RequestService extends BaseService {
     public List<Request> getRequestsByClientId(Long id) throws SQLException {
         return requestRepository.findByClientId(id);
     }
+
+    public List<Request> getPendingRequests() throws SQLException {
+        return requestRepository.getPendingRequests();
+    }
+
+    public void acceptRequest(Long id) throws SQLException {
+        requestRepository.acceptRequest(id);
+    }
     public void createRequest(Request request) throws SQLException {
         requestRepository.save(request);
     }
@@ -31,6 +39,7 @@ public class RequestService extends BaseService {
     public void updateRequest(Request request) throws SQLException {
         requestRepository.save(request);
     }
+
 
     public void deleteRequest(Long id) throws SQLException {
         requestRepository.deleteById(id);
