@@ -11,9 +11,6 @@ public class Request extends Entity {
     private Date deadline;
     private String status;
     private int clientID;
-    private int managerID;
-    private int leadID;
-    private int projectTeamID;
 
     public String getTitle() {
         return title;
@@ -62,40 +59,14 @@ public class Request extends Entity {
         this.clientID = clientID;
     }
 
-    public int getManagerID() {
-        return managerID;
-    }
-
-    public void setManagerID(int managerID) {
-        this.managerID = managerID;
-    }
-
-    public int getLeadID() {
-        return leadID;
-    }
-
-    public void setLeadID(int leadID) {
-        this.leadID = leadID;
-    }
-
-    public int getProjectTeamID() {
-        return projectTeamID;
-    }
-
-    public void setProjectTeamID(int projectTeamID) {
-        this.projectTeamID = projectTeamID;
-    }
-
     public Request(
                    String title,
                    String description,
                    Date creationDate,
                    Date deadline,
                    String status,
-                   int clientID,
-                   int managerID,
-                   int leadID,
-                   int projectTeamID)
+                   int clientID
+    )
     {
         this.title = title;
         this.description = description;
@@ -103,9 +74,6 @@ public class Request extends Entity {
         this.deadline = deadline;
         this.status = status;
         this.clientID = clientID;
-        this.managerID = managerID;
-        this.leadID = leadID;
-        this.projectTeamID = projectTeamID;
     }
     public Request() {
         super();
@@ -121,9 +89,6 @@ public class Request extends Entity {
                     ", deadline=" + deadline +
                     ", status='" + status + '\'' +
                     ", clientID=" + clientID +
-                    ", managerID=" + managerID +
-                    ", leadID=" + leadID +
-                    ", projectTeamID=" + projectTeamID +
                     '}';
         }
     }

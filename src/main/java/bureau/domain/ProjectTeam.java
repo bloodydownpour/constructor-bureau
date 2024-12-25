@@ -4,14 +4,12 @@ import java.util.ArrayList;
 
 public class ProjectTeam extends Entity{
     private String name;
-    private int leadID;
     private int projectID;
     private ArrayList<Integer> memberIDs;
 
-    public ProjectTeam(int id, String name, int leadID, int projectID, ArrayList<Integer> memberIDs) {
+    public ProjectTeam(int id, String name, int projectID, ArrayList<Integer> memberIDs) {
         super(id);
         this.name = name;
-        this.leadID = leadID;
         this.projectID = projectID;
         this.memberIDs = memberIDs;
     }
@@ -34,13 +32,6 @@ public class ProjectTeam extends Entity{
         this.name = name;
     }
 
-    public int getLeadID() {
-        return leadID;
-    }
-
-    public void setLeadID(int leadID) {
-        this.leadID = leadID;
-    }
     public void addMember(int memberID) {
         this.memberIDs.add(memberID);
     }

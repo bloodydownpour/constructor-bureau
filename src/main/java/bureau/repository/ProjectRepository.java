@@ -31,10 +31,13 @@ public class ProjectRepository extends BaseRepository {
          }
      }
      public void save(Project project) throws SQLException {
-        String query = "INSERT INTO project (name, request_id) VALUES (?, ?)";
+        String query = "INSERT INTO project (name, status, teamid, leadid, requestid) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement statement = getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, project.getName());
-            statement.setLong(2, project.getRequestID());
+            statement.setString(2, project.getStatus());
+            statement.setLong(3, project.getLeadID());
+            statement.setLong(4, project.getTeamID());
+            statement.setLong(5, project.getRequestID());
                 statement.executeUpdate();
 
                 ResultSet generatedKeys = statement.getGeneratedKeys();
@@ -56,12 +59,12 @@ public class ProjectRepository extends BaseRepository {
             Project project = new Project();
             project.setId(resultSet.getInt("id"));
             project.setName(resultSet.getString("name"));
-            project.setRequestID(resultSet.getInt("request_id"));
+            project.setRequestID(resultSet.getInt("requestid"));
             return project;
         }
 
     public List<Project> findByRequestId(Long requestId) throws SQLException {
-        String query = "SELECT * FROM project WHERE request_id = ?";
+        String query = "SELECT * FROM project WHERE requestid = ?";
         try (PreparedStatement statement = getConnection().prepareStatement(query)) {
             statement.setLong(1, requestId);
             ResultSet resultSet = statement.executeQuery();

@@ -32,14 +32,10 @@ public class ClientAddController extends HttpServlet {
             String description = req.getParameter("description");
             String deadlineStr = req.getParameter("deadline");
 
-            System.out.println(req.getParameter("title"));
-            System.out.println(req.getParameter("description"));
-            System.out.println(req.getParameter("deadline"));
-
             Date deadline = null;
             if (deadlineStr != null && !deadlineStr.isEmpty()) {
                 deadline = Date.valueOf(deadlineStr);
-            }
+            } else deadline = new Date(System.currentTimeMillis());
 
             Request request = new Request(
                     title,
@@ -47,10 +43,8 @@ public class ClientAddController extends HttpServlet {
                     new Date(System.currentTimeMillis()),
                     deadline,
                     "Pending",
-                    1,
-                    1,
-                    1,
-                    1);
+                    1
+            );
 
             requestService.createRequest(request);
 

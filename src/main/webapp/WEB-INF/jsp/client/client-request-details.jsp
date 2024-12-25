@@ -30,11 +30,11 @@
                     </tr>
                     <tr>
                         <th>Creation Date</th>
-                        <td><fmt:formatDate value="${request.creationDate}" pattern="yyyy-MM-dd" /></td>
+                        <td><fmt:formatDate value="${request.creationDate}" pattern="dd.MM.yyyy" /></td>
                     </tr>
                     <tr>
                         <th>Deadline</th>
-                        <td><fmt:formatDate value="${request.deadline}" pattern="yyyy-MM-dd" /></td>
+                        <td><fmt:formatDate value="${request.deadline}" pattern="dd.MM.yyyy" /></td>
                     </tr>
                     <tr>
                         <th>Status</th>
@@ -45,17 +45,6 @@
                         <td>${request.clientID}</td>
                     </tr>
                     <tr>
-                        <th>Manager ID</th>
-                        <td>${request.managerID}</td>
-                    </tr>
-                    <tr>
-                        <th>Lead ID</th>
-                        <td>${request.leadID}</td>
-                    </tr>
-                    <tr>
-                        <th>Project Team ID</th>
-                        <td>${request.projectTeamID}</td>
-                    </tr>
                 </table>
                 <p><a href="${pageContext.request.contextPath}/client/requests.html">Back to Requests</a></p>
             </c:when>

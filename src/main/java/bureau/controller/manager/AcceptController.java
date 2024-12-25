@@ -1,5 +1,8 @@
 package bureau.controller.manager;
 
+import bureau.domain.Project;
+import bureau.domain.Request;
+import bureau.services.ProjectService;
 import bureau.services.RequestService;
 import bureau.services.ServiceContainer;
 
@@ -18,10 +21,30 @@ public class AcceptController extends HttpServlet{
         try (ServiceContainer container = new ServiceContainer()) {
             RequestService requestService = container.getRequestServiceInstance();
             Long requestId = Long.parseLong(req.getParameter("id"));
+            Long leadId = Long.parseLong(req.getParameter("leadid"));
+            System.out.println(leadId);
+            System.out.println(requestId);
+
+            Request request = requestService.getRequestById(requestId).get();
             requestService.acceptRequest(requestId);
+
+            Project project = new Project();
+            project.setName(request.getTitle());
+            project.setStatus("In progress");
+            project.setLeadID(Math.toIntExact(leadId));
+            project.setRequestID(Math.toIntExact(requestId));
+            project.setTeamID(1);
+
+            ProjectService projectService = container.getProjectServiceInstance();
+            projectService.createProject(project);
+
+
+
+
 
             resp.sendRedirect(req.getContextPath() + "/manager/requests.html");
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new ServletException();
         }
     }
