@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+                <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/manager/manager-styles.css">
+
     <title>Manager: Details</title>
     <style>
         /* Скрываем форму по умолчанию */
@@ -25,6 +27,9 @@
       </style>
 </head>
 <body>
+<div class="header manager-background">
+		<h1 class="header__title">Конструкторское бюро "Равшан & Джамшут"</h1>
+	</div>
     <header>
         <h1>Детали заявки</h1>
     </header>

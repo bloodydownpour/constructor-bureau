@@ -5,9 +5,12 @@
 <html>
 <head>
     <title>Request Details</title>
-    <link rel="stylesheet" href="/styles/main.css"> <!-- Укажите ваш файл стилей -->
+       <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/client/client-styles.css">
 </head>
 <body>
+    <div class="header client-background">
+		<h1 class="header__title">Конструкторское бюро "Равшан & Джамшут"</h1>
+	</div>
     <header>
         <h1>Request Details</h1>
     </header>

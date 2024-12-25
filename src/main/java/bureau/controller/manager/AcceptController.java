@@ -22,8 +22,6 @@ public class AcceptController extends HttpServlet{
             RequestService requestService = container.getRequestServiceInstance();
             Long requestId = Long.parseLong(req.getParameter("id"));
             Long leadId = Long.parseLong(req.getParameter("leadid"));
-            System.out.println(leadId);
-            System.out.println(requestId);
 
             Request request = requestService.getRequestById(requestId).get();
             requestService.acceptRequest(requestId);

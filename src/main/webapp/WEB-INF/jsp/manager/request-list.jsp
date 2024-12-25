@@ -4,9 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/manager/manager-styles.css">
+
     <title>Список заявок</title>
 </head>
 <body>
+<div class="header manager-background">
+		<h1 class="header__title">Конструкторское бюро "Равшан & Джамшут"</h1>
+	</div>
     <h1>Заявка</h1>
     <table border="1">
         <thead>

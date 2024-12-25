@@ -1,7 +1,6 @@
-package bureau.controller.client;
+package bureau.controller.constructor;
 
-import bureau.domain.Request;
-import bureau.services.RequestService;
+import bureau.services.ProjectService;
 import bureau.services.ServiceContainer;
 
 import jakarta.servlet.ServletException;
@@ -12,18 +11,18 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
-@WebServlet("/client/requests.html")
-public class ClientRequestController extends HttpServlet {
+@WebServlet("/constructor/details/update")
+public class ConstructorUpdateStatusController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (ServiceContainer container = new ServiceContainer()) {
-            RequestService requestService = container.getRequestServiceInstance();
+            ProjectService projectService = container.getProjectServiceInstance();
+            int projectId = Integer.parseInt(req.getParameter("id"));
+            String status = req.getParameter("status");
+            projectService.updateProjectStatus((long) projectId, status);
 
-            List<Request> requests = requestService.getAllRequests();
-            req.setAttribute("requests", requests);
-            req.getRequestDispatcher("/WEB-INF/jsp/client/client-requests.jsp").forward(req, resp);
+            resp.sendRedirect(req.getContextPath() + "/constructor/details.html?id=" + projectId);
         } catch (SQLException e) {
             throw new ServletException(e);
         }

@@ -5,9 +5,12 @@
 <html>
 <head>
     <title>Client Requests</title>
-    <link rel="stylesheet" href="/styles/main.css"> <!-- Добавьте свой файл стилей -->
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/client/client-styles.css">
 </head>
 <body>
+    <div class="header client-background">
+		<h1 class="header__title">Конструкторское бюро "Равшан & Джамшут"</h1>
+	</div>
     <header>
         <h1>Your Requests</h1>
     </header>
@@ -16,7 +19,7 @@
         <c:choose>
             <c:when test="${not empty requests}">
                 <table border="1" cellpadding="10" cellspacing="0">
-                    <thead>
+                    <thead class="client-background">
                         <tr>
                             <th>Request ID</th>
                             <th>Title</th>

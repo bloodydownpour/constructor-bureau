@@ -32,7 +32,11 @@ public class ProjectService extends BaseService {
         projectRepository.deleteById(id);
     }
 
-    public List<Project> getProjectsByRequestId(Long     requestId) throws SQLException {
+    public List<Project> getProjectsByRequestId(Long requestId) throws SQLException {
         return projectRepository.findByRequestId(requestId);
+    }
+
+    public void updateProjectStatus(Long id, String status) throws SQLException {
+        projectRepository.updateProjectStatus(id, status);
     }
 }

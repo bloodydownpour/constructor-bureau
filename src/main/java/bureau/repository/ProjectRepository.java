@@ -60,6 +60,9 @@ public class ProjectRepository extends BaseRepository {
             project.setId(resultSet.getInt("id"));
             project.setName(resultSet.getString("name"));
             project.setRequestID(resultSet.getInt("requestid"));
+            project.setStatus(resultSet.getString("status"));
+            project.setTeamID(resultSet.getInt("teamid"));
+            project.setLeadID(resultSet.getInt("leadid"));
             return project;
         }
 
@@ -74,6 +77,15 @@ public class ProjectRepository extends BaseRepository {
                 projects.add(mapRowToProject(resultSet));
             }
             return projects;
+        }
+    }
+
+    public void updateProjectStatus(Long id, String status) throws SQLException {
+        String query = "UPDATE project SET status = ? WHERE id = ?";
+        try (PreparedStatement statement = getConnection().prepareStatement(query)) {
+            statement.setString(1, status);
+            statement.setLong(2, id);
+            statement.executeUpdate();
         }
     }
     }

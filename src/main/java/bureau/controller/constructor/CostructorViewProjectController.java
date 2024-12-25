@@ -1,9 +1,10 @@
-package bureau.controller.client;
+package bureau.controller.constructor;
 
+import bureau.domain.Project;
 import bureau.domain.Request;
+import bureau.services.ProjectService;
 import bureau.services.RequestService;
 import bureau.services.ServiceContainer;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,18 +15,20 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/client/requests.html")
-public class ClientRequestController extends HttpServlet {
+@WebServlet("/constructor/projects.html")
+public class CostructorViewProjectController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (ServiceContainer container = new ServiceContainer()) {
-            RequestService requestService = container.getRequestServiceInstance();
+            ProjectService projectService = container.getProjectServiceInstance();
 
-            List<Request> requests = requestService.getAllRequests();
-            req.setAttribute("requests", requests);
-            req.getRequestDispatcher("/WEB-INF/jsp/client/client-requests.jsp").forward(req, resp);
+            List<Project> projects = projectService.getAllProjects();
+            req.setAttribute("projects", projects);
+            req.getRequestDispatcher("/WEB-INF/jsp/constructor/constructor-projects.jsp").forward(req, resp);
         } catch (SQLException e) {
             throw new ServletException(e);
         }
     }
 }
+
+
