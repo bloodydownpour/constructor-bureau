@@ -1,5 +1,7 @@
 package bureau.web;
 
+import bureau.repository.ConnectionPool;
+import bureau.repository.ConnectionPoolException;
 import bureau.repository.DatabaseConnector;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
@@ -16,8 +18,10 @@ public class ApplicationLifecycleListener implements ServletContextListener {
             String jdbcUrl      = context.getInitParameter("jdbc-url");
             String jdbcUser     = context.getInitParameter("jdbc-user");
             String jdbcPassword = context.getInitParameter("jdbc-password");
+            int poolSize = 10;
             DatabaseConnector.init(jdbcDriver, jdbcUrl, jdbcUser, jdbcPassword);
-        } catch(ClassNotFoundException e) {
+            ConnectionPool.getInstance().init(poolSize);
+        } catch(ClassNotFoundException | ConnectionPoolException e) {
             throw new RuntimeException(e);
         }
     }

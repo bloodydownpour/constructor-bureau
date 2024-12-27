@@ -31,13 +31,14 @@ public class ProjectRepository extends BaseRepository {
          }
      }
      public void save(Project project) throws SQLException {
-        String query = "INSERT INTO project (name, status, teamid, leadid, requestid) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO project (id, name, status, teamid, leadid, requestid) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, project.getName());
-            statement.setString(2, project.getStatus());
-            statement.setLong(3, project.getLeadID());
-            statement.setLong(4, project.getTeamID());
-            statement.setLong(5, project.getRequestID());
+            statement.setInt(1, 1);
+            statement.setString(2, project.getName());
+            statement.setString(3, project.getStatus());
+            statement.setLong(4, project.getLeadID());
+            statement.setLong(5, project.getTeamID());
+            statement.setLong(6, project.getRequestID());
                 statement.executeUpdate();
 
                 ResultSet generatedKeys = statement.getGeneratedKeys();

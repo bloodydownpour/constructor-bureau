@@ -95,9 +95,13 @@ public class ServiceContainer implements AutoCloseable {
     }
 
     private Connection connection;
-    private Connection getConnectionInstance() throws SQLException {
+    private Connection getConnectionInstance() {
         if (connection == null) {
-            connection = DatabaseConnector.getConnection(); // Используйте ваш класс для подключения к БД
+            try {
+                connection = ConnectionPool.getInstance().getConnection(); // Используйте ваш класс для подключения к БД
+            } catch (ConnectionPoolException e) {
+                throw new RuntimeException(e);
+            }
         }
         return connection;
     }
