@@ -1,17 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/manager/manager-styles.css">
+<%@page contentType="text/html;charset=UTF-8"%>
+<%@taglib prefix="c" uri="jakarta.tags.core"%>
+<%@taglib prefix="fmt" uri="jakarta.tags.fmt"%>
+<%@taglib prefix="u" tagdir="/WEB-INF/tags"%>
 
-    <title>Список заявок</title>
-</head>
-<body>
-<div class="header manager-background">
-		<h1 class="header__title">Конструкторское бюро "Равшан & Джамшут"</h1>
-	</div>
+<u:page title="Список заявок    "
+    css="${['/css/manager/manager-styles.css']}">
     <h1>Заявка</h1>
     <table border="1">
         <thead>
@@ -39,5 +32,4 @@
         </c:forEach>
         </tbody>
     </table>
-</body>
-</html>
+</u:page>

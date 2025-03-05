@@ -1,40 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-                <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/manager/manager-styles.css">
+<%@page contentType="text/html;charset=UTF-8"%>
+<%@taglib prefix="c" uri="jakarta.tags.core"%>
+<%@taglib prefix="fmt" uri="jakarta.tags.fmt"%>
+<%@taglib prefix="u" tagdir="/WEB-INF/tags"%>
 
-    <title>Manager: Details</title>
-    <style>
-        /* Скрываем форму по умолчанию */
-        #accept-form-container {
-          display: none;
-          margin-top: 20px;
-        }
-        /* Стили для кнопки и формы */
-        button {
-          padding: 10px 20px;
-          font-size: 16px;
-          cursor: pointer;
-        }
-        form {
-          border: 1px solid #ccc;
-          padding: 20px;
-          border-radius: 5px;
-        }
-      </style>
-</head>
-<body>
-<div class="header manager-background">
-		<h1 class="header__title">Конструкторское бюро "Равшан & Джамшут"</h1>
-	</div>
-    <header>
-        <h1>Детали заявки</h1>
-    </header>
-    <main>
-        <!-- Проверка на наличие объекта request -->
+<u:page title="Детали заявки"
+    css="${['/css/manager/manager-styles.css', '/css/manager/manager-extra-styles.css']}">
         <c:choose>
             <c:when test="${not empty request}">
                 <table border="1" cellpadding="10" cellspacing="0">
@@ -88,10 +58,7 @@
               <button type="submit">Accept</button>
             </form>
           </div>
-    </main>
-    <footer>
-        <p>&copy; 2024 Your Company</p>
-    </footer>
+
     <script>
         // Находим элементы
         const AcceptBtn = document.getElementById('accept-btn');
@@ -102,5 +69,4 @@
             AcceptFormContainer.style.display = 'block';
         });
       </script>
-</body>
-</html>
+</u:page>

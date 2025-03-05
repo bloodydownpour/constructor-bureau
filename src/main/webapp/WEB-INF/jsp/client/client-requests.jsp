@@ -1,21 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Client Requests</title>
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/client/client-styles.css">
-</head>
-<body>
-    <div class="header client-background">
-		<h1 class="header__title">Конструкторское бюро "Равшан & Джамшут"</h1>
-	</div>
-    <header>
-        <h1>Your Requests</h1>
-    </header>
-    <main>
-        <!-- Проверка на наличие заявок -->
+<%@page contentType="text/html;charset=UTF-8"%>
+<%@taglib prefix="c" uri="jakarta.tags.core"%>
+<%@taglib prefix="fmt" uri="jakarta.tags.fmt"%>
+<%@taglib prefix="u" tagdir="/WEB-INF/tags"%>
+
+<u:page title="Your Requests"
+    css="${['/css/client/client-styles.css']}">
         <c:choose>
             <c:when test="${not empty requests}">
                 <table border="1" cellpadding="10" cellspacing="0">
@@ -52,11 +41,4 @@
                 <p>No requests found. <a href="${pageContext.request.contextPath}/client/request/new.html">Create a new request</a>.</p>
             </c:otherwise>
         </c:choose>
-
-
-    </main>
-    <footer>
-        <p>&copy; 2024 Your Company</p>
-    </footer>
-</body>
-</html>
+</u:page>

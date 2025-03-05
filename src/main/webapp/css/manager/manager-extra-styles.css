@@ -1,0 +1,14 @@
+#accept-form-container {
+          display: none;
+          margin-top: 20px;
+        }
+        button {
+          padding: 10px 20px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+        form {
+          border: 1px solid #ccc;
+          padding: 20px;
+          border-radius: 5px;
+        }

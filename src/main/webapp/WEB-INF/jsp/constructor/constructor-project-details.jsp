@@ -1,38 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Project Details</title>
-        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/constructor/constructor-styles.css">
-    <style>
-            #update-form-container {
-              display: none;
-              margin-top: 20px;
-            }
-            /* Стили для кнопки и формы */
-            button {
-              padding: 10px 20px;
-              font-size: 16px;
-              cursor: pointer;
-            }
-            form {
-              border: 1px solid #ccc;
-              padding: 20px;
-              border-radius: 5px;
-            }
-          </style>
-</head>
-<body>
-    <div class="header constructor-background">
-		<h1 class="header__title">Конструкторское бюро "Равшан & Джамшут"</h1>
-	</div>
-    <header>
-        <h1>Project Details</h1>
-    </header>
-    <main>
-        <!-- Проверка на наличие объекта request -->
+<%@page contentType="text/html;charset=UTF-8"%>
+<%@taglib prefix="c" uri="jakarta.tags.core"%>
+<%@taglib prefix="fmt" uri="jakarta.tags.fmt"%>
+<%@taglib prefix="u" tagdir="/WEB-INF/tags"%>
+<u:page title="Project Details"
+    css="${['/css/constructor/constructor-styles.css', '/css/constructor/constructor-extra-styles.css']}">
         <c:choose>
             <c:when test="${not empty project}">
                 <table border="1" cellpadding="10" cellspacing="0">
@@ -86,9 +57,5 @@
             StatusFormContainer.style.display = 'block';
             });
         </script>
-    </main>
-    <footer>
-        <p>&copy; 2024 Your Company</p>
-    </footer>
-</body>
-</html>
+</u:page>
+

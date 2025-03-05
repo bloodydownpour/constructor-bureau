@@ -1,18 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/client/client-styles.css">
+<%@page contentType="text/html;charset=UTF-8"%>
+<%@taglib prefix="c" uri="jakarta.tags.core"%>
+<%@taglib prefix="fmt" uri="jakarta.tags.fmt"%>
+<%@taglib prefix="u" tagdir="/WEB-INF/tags"%>
 
-    <title>Добавить заявку</title>
-</head>
-<body>
-    <div class="header client-background">
-		<h1 class="header__title">Конструкторское бюро "Равшан & Джамшут"</h1>
-	</div>
+<u:page title="Добавить заявку"
+    css="${['/css/client/client-styles.css']}">
     <h1>Добавить заявку</h1>
     <form action="${pageContext.request.contextPath}/client/request/new.html" method="post">
         <label for="title">Название</label>
@@ -28,5 +20,4 @@
     </form>
     <br>
     <a href="${pageContext.request.contextPath}/client/requests.html">Назад к списку заявок</a>
-</body>
-</html>
+</u:page>

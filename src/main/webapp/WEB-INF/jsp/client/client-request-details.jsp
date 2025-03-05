@@ -1,21 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Request Details</title>
-       <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/client/client-styles.css">
-</head>
-<body>
-    <div class="header client-background">
-		<h1 class="header__title">Конструкторское бюро "Равшан & Джамшут"</h1>
-	</div>
-    <header>
-        <h1>Request Details</h1>
-    </header>
-    <main>
-        <!-- Проверка на наличие объекта request -->
+<%@page contentType="text/html;charset=UTF-8"%>
+<%@taglib prefix="c" uri="jakarta.tags.core"%>
+<%@taglib prefix="fmt" uri="jakarta.tags.fmt"%>
+<%@taglib prefix="u" tagdir="/WEB-INF/tags"%>
+
+<u:page title="Добавить заявку"
+    css="${['/css/client/client-styles.css']}">
         <c:choose>
             <c:when test="${not empty request}">
                 <table border="1" cellpadding="10" cellspacing="0">
@@ -55,9 +44,4 @@
                 <p>No request details available.</p>
             </c:otherwise>
         </c:choose>
-    </main>
-    <footer>
-        <p>&copy; 2024 Your Company</p>
-    </footer>
-</body>
-</html>
+</u:page>
