@@ -1,41 +1,31 @@
 package bureau.domain;
 
 public class User extends Entity {
+    private String login;
+    private String password;
+    private Role role;
 
-    private String username;
-    private String email;
-    private String role;
-
-    public String getUsername() {
-        return username;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
-
-    public User(int id, String username, String email, String role) {
-        super(id);
-        this.username = username;
-        this.email = email;
-        this.role = role;
-    }
-    public User() {}
-
 }

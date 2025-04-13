@@ -86,6 +86,7 @@ public class ServiceContainer implements AutoCloseable {
     }
 
     private UserRepository userRepository;
+
     private UserRepository getUserRepositoryInstance() throws SQLException {
         if (userRepository == null) {
             userRepository = new UserRepository();

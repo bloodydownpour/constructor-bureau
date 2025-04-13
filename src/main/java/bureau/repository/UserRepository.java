@@ -1,82 +1,116 @@
 package bureau.repository;
 
-import bureau.domain.*;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import bureau.domain.Role;
+import bureau.domain.User;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Objects;
 import java.util.Optional;
 
 public class UserRepository extends BaseRepository {
-    public Optional<User> findById(Long id) throws SQLException {
-        String query = "SELECT * FROM _user WHERE id = ?";
-        try (PreparedStatement statement = getConnection().prepareStatement(query)) {
-            statement.setLong(1, id);
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                User user = mapRowToUser(resultSet);
-                return Optional.of(user);
-            }
-            return Optional.empty();
-        }
-    }
-
-    public List<User> findAll() throws SQLException {
-        String query = "SELECT * FROM _user";
-        try (PreparedStatement statement = getConnection().prepareStatement(query)) {
-            ResultSet resultSet = statement.executeQuery();
-            List<User> users = new ArrayList<>();
-
-            while (resultSet.next()) {
-                users.add(mapRowToUser(resultSet));
-            }
-            return users;
-        }
-    }
-
-    public List<User> findByRole(String role) throws SQLException {
-        String query = "SELECT * FROM users WHERE role = ?";
-        try (PreparedStatement statement = getConnection().prepareStatement(query)) {
-            statement.setString(1, role);
-            ResultSet resultSet = statement.executeQuery();
-            List<User> users = new ArrayList<>();
-
-            while (resultSet.next()) {
-                users.add(mapRowToUser(resultSet));
-            }
-            return users;
-        }
-    }
-
-    public void save(User user) throws SQLException {
-        String query = "INSERT INTO users (name, email, role) VALUES (?, ?, ?)";
-        try (PreparedStatement statement = getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, user.getUsername());
-            statement.setString(2, user.getEmail());
-            statement.setString(3, user.getRole());
+    public Long create(User user) throws RepositoryException {
+        String sql = "INSERT INTO \"user\"(\"login\", \"password\", \"role\") VALUES (?, ?, ?)";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, user.getLogin());
+            statement.setString(2, user.getPassword());
+            statement.setString(3, user.getRole().toString());
             statement.executeUpdate();
-
-            ResultSet generatedKeys = statement.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                user.setId(generatedKeys.getInt(1));
-            }
+            resultSet = statement.getGeneratedKeys();
+            resultSet.next();
+            return resultSet.getLong(1);
+        } catch(SQLException e) {
+            throw new RepositoryException(e);
+        } finally {
+            try { Objects.requireNonNull(resultSet).close(); } catch(Exception ignored) {}
+            try { Objects.requireNonNull(statement).close(); } catch(Exception ignored) {}
         }
     }
 
-    public void deleteById(Long id) throws SQLException {
-        String query = "DELETE FROM users WHERE id = ?";
-        try (PreparedStatement statement = getConnection().prepareStatement(query)) {
+    public Optional<User> readByLoginAndPassword(String login, String password) throws RepositoryException {
+        String sql = "SELECT \"id\", \"login\", \"password\", \"role\" FROM \"user\" WHERE \"login\" = ? AND \"password\" = ?";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = getConnection().prepareStatement(sql);
+            statement.setString(1, login);
+            statement.setString(2, password);
+            resultSet = statement.executeQuery();
+            User user = null;
+            if(resultSet.next()) {
+                user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setLogin(resultSet.getString("login"));
+                user.setPassword(resultSet.getString("password"));
+                user.setRole(Role.valueOf(resultSet.getString("role")));
+            }
+            return Optional.ofNullable(user);
+        } catch(SQLException e) {
+            throw new RepositoryException(e);
+        } finally {
+            try { Objects.requireNonNull(resultSet).close(); } catch(Exception ignored) {}
+            try { Objects.requireNonNull(statement).close(); } catch(Exception ignored) {}
+        }
+    }
+
+    public Optional<User> read(Long id) throws RepositoryException {
+        String sql = "SELECT \"id\", \"login\", \"password\", \"role\" FROM \"user\" WHERE \"id\" = ?";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = getConnection().prepareStatement(sql);
+            statement.setLong(1, id);
+            resultSet = statement.executeQuery();
+            User user = null;
+            if(resultSet.next()) {
+                user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setLogin(resultSet.getString("login"));
+                user.setPassword(resultSet.getString("password"));
+                user.setRole(Role.valueOf(resultSet.getString("role")));
+            }
+            return Optional.ofNullable(user);
+        } catch(SQLException e) {
+            throw new RepositoryException(e);
+        } finally {
+            try { Objects.requireNonNull(resultSet).close(); } catch(Exception ignored) {}
+            try { Objects.requireNonNull(statement).close(); } catch(Exception ignored) {}
+        }
+    }
+
+    public void update(User user) throws RepositoryException {
+        String sql = "UPDATE \"user\" SET \"login\" = ?, \"password\" = ?, \"role\" = ? WHERE \"id\" = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = getConnection().prepareStatement(sql);
+            statement.setString(1, user.getLogin());
+            statement.setString(2, user.getPassword());
+            statement.setString(3, user.getRole().toString());
+            statement.setLong(4, user.getId());
+            statement.executeUpdate();
+        } catch(SQLException e) {
+            throw new RepositoryException(e);
+        } finally {
+            try { Objects.requireNonNull(statement).close(); } catch(Exception ignored) {}
+        }
+    }
+
+    public void delete(Long id) throws RepositoryException {
+        String sql = "DELETE FROM \"user\" WHERE \"id\" = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = getConnection().prepareStatement(sql);
             statement.setLong(1, id);
             statement.executeUpdate();
+        } catch(SQLException e) {
+            throw new RepositoryException(e);
+        } finally {
+            try { Objects.requireNonNull(statement).close(); } catch(Exception ignored) {}
         }
-    }
-
-    private User mapRowToUser(ResultSet resultSet) throws SQLException {
-        User user = new User();
-        user.setId(resultSet.getInt("id"));
-        user.setUsername(resultSet.getString("name"));
-        user.setEmail(resultSet.getString("email"));
-        user.setRole(resultSet.getString("role"));
-        return user;
     }
 }
