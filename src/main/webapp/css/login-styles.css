@@ -13,6 +13,11 @@ h1, h2 {
   color: #444;
 }
 
+.centered {
+text-align: center;
+float: center;
+}
+
 /* Links */
 a {
   color: #007bff;
@@ -22,6 +27,7 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Navigation Menu */
 nav {
   background-color: #007bff;
   color: white;
@@ -42,6 +48,7 @@ nav a:hover {
   text-decoration: underline;
 }
 
+/* Table Styles */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -67,6 +74,7 @@ tr:nth-child(odd) {
   background-color: #ffffff;
 }
 
+/* Form Styles */
 form {
   max-width: 600px;
   margin: 20px auto;
@@ -79,14 +87,17 @@ form {
 
 form input, form textarea, form button {
   width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
   margin-bottom: 10px;
-  padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
 form button {
+  padding-bottom: 0px;
+  padding: 10px;
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -97,6 +108,7 @@ form button:hover {
   background-color: #0056b3;
 }
 
+/* Button Styles */
 button {
   padding: 10px 20px;
   font-size: 16px;
@@ -123,6 +135,7 @@ button.reject:hover {
   background-color: #c82333;
 }
 
+/* Footer Styles */
 footer {
   text-align: center;
   margin-top: 20px;
@@ -139,7 +152,7 @@ footer {
 	box-shadow: #2222 0 6px 24px 0;
 }
 .background {
-	background: #58e068;
+	background: #f89bdc;
 }
 .header__title {
 	float: left;
